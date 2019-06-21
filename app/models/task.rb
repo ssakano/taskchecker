@@ -1,4 +1,5 @@
-class Task < ApplicationRecord 
+class Task < ApplicationRecord
+ validates :task, presence: true, length: { maximum: 255}
 end
 
  # TaskクラスはApplicationRecordクラスを継承している。
