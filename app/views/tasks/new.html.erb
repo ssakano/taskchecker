@@ -1,0 +1,10 @@
+<h1>新規タスクの入力ページ</h1>
+<%= form_for(@task) do |f| %>
+  <%= f.label :task, 'タスク' %>
+  <%= f.text_field :task %>
+<%= f.submit '入力' %>
+<% end %>
+
+<%= link_to '一覧に戻る', tasks_path %>
+
+  

@@ -2,20 +2,24 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> #IE専用で、IEが持つ後方互換表示の機能を使わずに、標準モードでページを表示してもらうための設定
-    <meta name="viewport" content="width=device-width, initial-scale=1"> #表示領域(viewport)の設定　レスポンシブデザインになる。
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <! IE専用で、IEが持つ後方互換表示の機能を使わずに、標準モードでページを表示してもらうための設定 >
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <! 表示領域(viewport)の設定　レスポンシブデザインになる。>
     
     <title>Taskchecker</title>
-    <%= csrf_meta_tags %>
-  #Bootstrapの読み込み（BootstrapはCDNにあるものを使用）  
+    <%= csrf_meta_tags %>  <! セキュリティ対策用のコード>
+  <! Bootstrapの読み込み（BootstrapはCDNにあるものを使用） > 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  #Bootstrapの読み込み（BootstrapはCDNにあるものを使用）
+  <! Bootstrapの読み込み（BootstrapはCDNにあるものを使用）>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= render 'layouts/flash_tasks' %>
+
+    <%= yield %>　<! 共通化の為に重要！！（body要素内以外が共通化され、body要素内はアクセスされたページ毎のコンテンツが切り替えられて表示される）>
+    </div>
   </body>
 </html>
