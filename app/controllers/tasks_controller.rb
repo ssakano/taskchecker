@@ -3,7 +3,9 @@ class TasksController < ApplicationController
  # ApplicationRecordクラスが定義されたファイルはapp/controllers/application_controller.rb
  
   def index
-    @tasks = Task.all
+    @tasks = Task.order(created_at: :desc).page(params[:page]).per(5)
+    #ページネーションで１ページに5個のタスクずつ、降順。
+    #@tasks = Task.all.page(params[:page]).per(5) にすると、昇順になる。
   end
  
   def show
@@ -60,7 +62,7 @@ private
 
 #Strong Parameter
 def task_params
-  params.require(:task).permit(:task)
+  params.require(:task).permit(:task, :description, :status)
 end
  
  

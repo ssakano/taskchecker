@@ -16,8 +16,9 @@
   </head>
 
   <body>
+    <%= render 'layouts/navbar' %>
     <div class="container">
-      <%= render 'layouts/flash_tasks' %>
+    <%= render 'layouts/flash_tasks' %>
 
     <%= yield %>　<! 共通化の為に重要！！（body要素内以外が共通化され、body要素内はアクセスされたページ毎のコンテンツが切り替えられて表示される）>
     </div>
