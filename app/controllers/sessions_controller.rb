@@ -5,9 +5,11 @@ class SessionsController < ApplicationController
   end
   
   def create
-    user = User.find by(email: session_params[:email])
-    
+    user = User.find_by(email: session_params[:email])
+  
+  #メールアドレスでユーザーを検索、見つかったらパスワード認証  
     if user&.authenticate(session_params[:password])
+  #認証に成功したらセッションにuser_idを格納
       session[:user_id] = user.id
       redirect_to root_url, notice: 'ログインしました。'
     else
@@ -21,6 +23,7 @@ class SessionsController < ApplicationController
   end
    
   private
+  
   def session_params
     params.require(:session).permit(:email, :password)
   end

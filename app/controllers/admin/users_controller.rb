@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :require_admin
   def index
     @users = User.all
   end
@@ -38,12 +39,16 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_user_url, notice: "ユーザー「#{@user.name}」を削除しました。"
+     redirect_to admin_users_url, notice: "ユーザー「#{@user.name}」を削除しました。"
   end
   
   private
+  #管理者かどうか確認
+  def require_admin
+    require_to root_url unless current_user.admin?
+  end
   
   def user_params
-    params.require(:user).permit(:name, :email, :admin, :password, password_confirmation)
+    params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
   end
 end

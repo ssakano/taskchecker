@@ -3,13 +3,15 @@ class TasksController < ApplicationController
  # ApplicationRecordクラスが定義されたファイルはapp/controllers/application_controller.rb
  
   def index
-    @tasks = Task.order(created_at: :desc).page(params[:page]).per(5)
+    #@tasks = Task.order(created_at: :desc).page(params[:page]).per(5)
     #ページネーションで１ページに5個のタスクずつ、降順。
     #@tasks = Task.all.page(params[:page]).per(5) にすると、昇順になる。
+    @tasks = current_user.tasks.page(params[:page]).per(5)
   end
  
   def show
-    @task = Task.find(params[:id])
+    #@task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
   
   def new
@@ -18,7 +20,9 @@ class TasksController < ApplicationController
   
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
     #Taskのインスタンスを生成するときにStrong Parameterが使用される
+    #ログインしているユーザーのみがタスクデータを入力できる
     if @task.save
     # if文による条件分岐と、@taskの保存を同時に行っている
     # @task.saveは成功するとtrueを返し、失敗するとfalseを返す
@@ -33,11 +37,13 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+    #@task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
+    #@task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
     if @task.update(task_params)
       flash[:success] = 'タスクが正常に更新されました。'
       redirect_to @task
@@ -50,7 +56,8 @@ class TasksController < ApplicationController
   end
   
   def destroy
-    @task = Task.find(params[:id])
+    #@task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
     @task.destroy
     
     flash[:success] = "タスクは正常に削除されました"

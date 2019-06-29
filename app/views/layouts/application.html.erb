@@ -16,21 +16,10 @@
   </head>
 
   <body>
-    <ul class="navbar-nav ml-auto"> </ul>
-      <% if current_user %>
-        <li class="nav-item"><%= link_to 'タスク一覧', tasks_path, class: 'nav-link' %></li>
-        <li class="nav-item"><%= link_to 'ユーザー一覧', admin_users_path, class: 'nav-link' %></li>
-        <li class="nav-item"><%= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link' %></li>
-      <% else %>
-        <li class="nav-item"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
-      <% end %>
-    
-    
     <%= render 'layouts/navbar' %>
-    <div class="container">
-    <%= render 'layouts/flash_tasks' %>
-
-    <%= yield %>　<! 共通化の為に重要！！（body要素内以外が共通化され、body要素内はアクセスされたページ毎のコンテンツが切り替えられて表示される）>
-    </div>
+      <div class="container">
+        <%= render 'layouts/flash_tasks' %>
+          <%= yield %>　<! 共通化の為に重要！！（body要素内以外が共通化され、body要素内はアクセスされたページ毎のコンテンツが切り替えられて表示される）>
+      </div>
   </body>
 </html>

@@ -1,34 +1,37 @@
 <h1>ユーザーの詳細</h1>
-<div class="nav justify-content-end"> </div>
-<%= link_to '一覧', admin_user_path, class: "nav-link"  %>
-  <table class="table table-hover"> 
+
+  <table class="table table-bordered"> 
     <tbody>
       <tr> 
-        <th>User.human_attribute_name(:id)</th>
-        <td><%= @user.id %>
+        <th>ID</th>
+        <td><%= @user.id %></td>
       </tr>
       <tr> 
-        <th>User.human_attribute_name(:name)</th>
-        <td><%= @user.name %>
+        <th>名前</th>
+        <td><%= @user.name %></td>
       </tr>
       <tr> 
-        <th>User.human_attribute_name(:email)</th>
-        <td><%= @user.email %>
+        <th>メールアドレス</th>
+        <td><%= @user.email %></td>
       </tr>
       <tr> 
-        <th>User.human_attribute_name(:admin)</th>
-        <td><%= @user.admin? ? 'あり' : 'なし' %>
+        <th>管理者権限</th>
+        <td><%= @user.admin? ? 'あり' : 'なし' %></td>
       </tr>
       <tr> 
-        <th>User.human_attribute_name(:created_at)</th>
-        <td><%= @user.created_at %>
+        <th>作成日</th>
+        <td><%= @user.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></td>
       </tr>
       <tr> 
-        <th>User.human_attribute_name(:updated_at)</th>
-        <td><%= @user.updated_at %>
+        <th>更新日</th>
+        <td><%= @user.updated_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></td>
       </tr>
     </tbody>
+  </table>
 
   <%= link_to '編集', edit_admin_user_path, class: "btn btn-primary mr-3"  %>
-  <%= link_to '削除', [:admin, @user], method: delete, data: { confirm: 'ユーザー「#{user.name}」を削除してよろしいですか？'}, class: "btn btn-danger"  %>
+  <%= link_to '削除', [:admin, @user], method: :delete, data: { confirm: 'ユーザー「#{user.name}」を削除してよろしいですか？'}, class: "btn btn-danger"  %>
 
+  
+  
+  
