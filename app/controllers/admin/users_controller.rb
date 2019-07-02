@@ -45,7 +45,8 @@ class Admin::UsersController < ApplicationController
   private
   #管理者かどうか確認
   def require_admin
-    require_to root_url unless current_user.admin?
+    #require_to root_url unless current_user.admin?  --間違い！
+    redirect_to root_url unless current_user.admin?
   end
   
   def user_params
